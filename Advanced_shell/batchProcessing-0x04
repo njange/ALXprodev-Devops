@@ -24,4 +24,10 @@ for pid in "${jobs[@]}"; do
     wait "$pid"
 done
 
+# Example: kill all background jobs if needed (not required for normal completion)
+# Uncomment the following lines if you want to forcibly terminate all jobs (not recommended for this use case)
+ for pid in "${jobs[@]}"; do
+     kill "$pid" 2>/dev/null
+ done
+
 echo "All fetch operations completed."
