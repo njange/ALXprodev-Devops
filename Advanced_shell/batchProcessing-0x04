@@ -5,6 +5,8 @@ DATA_DIR="pokemon_data_parallel"
 
 mkdir -p "$DATA_DIR"
 
+jobs=() # Array to store background job PIDs
+
 for name in "${POKEMONS[@]}"; do
     (
         echo "Fetching data for $name..."
@@ -14,7 +16,12 @@ for name in "${POKEMONS[@]}"; do
             echo "Failed to fetch data for $name ❌"
         fi
     ) &
+    jobs+=($!) # Store PID of background job
 done
 
-wait
+# Wait for all background jobs to finish
+for pid in "${jobs[@]}"; do
+    wait "$pid"
+done
+
 echo
