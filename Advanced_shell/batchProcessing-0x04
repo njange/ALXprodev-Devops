@@ -24,4 +24,4 @@ for pid in "${jobs[@]}"; do
     wait "$pid"
 done
 
-echo
+echo "All fetch operations completed."
